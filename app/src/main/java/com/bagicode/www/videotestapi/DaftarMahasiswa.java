@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bagicode.www.videotestapi.API.ApiService;
 import com.bagicode.www.videotestapi.Adapter.ListArrayAdapter;
@@ -50,7 +52,16 @@ public class DaftarMahasiswa extends AppCompatActivity implements AdapterView.On
         listview = (ListView) findViewById(R.id.listMhsMhs);
         listview.setOnItemClickListener(DaftarMahasiswa.this);
         listview.setDividerHeight(0);
-        setup();
+//        setup();
+
+        FloatingActionButton btnAdd = (FloatingActionButton) findViewById(R.id.btn_add);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goAdd = new Intent(DaftarMahasiswa.this, MainAdd.class);
+                startActivity(goAdd);
+            }
+        });
 
     }
 
@@ -66,6 +77,9 @@ public class DaftarMahasiswa extends AppCompatActivity implements AdapterView.On
         call.enqueue(new Callback<List<ModelData>>() {
             @Override
             public void onResponse(Call<List<ModelData>> call, Response<List<ModelData>> response) {
+
+                // tambahkan
+                 datamahasiswa.clear();
 
                 if (response.isSuccessful()) {
                     int jumlah = response.body().size();
@@ -116,6 +130,10 @@ public class DaftarMahasiswa extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        TextView ids = (TextView) view.findViewById(R.id.listID1);
+        Intent intent = new Intent(DaftarMahasiswa.this, MainEdit.class);
+        intent.putExtra(ModelData.id_mahasiswa, ids.getText().toString());
+        startActivityForResult(intent, 1);
     }
 
     @Override
@@ -125,5 +143,17 @@ public class DaftarMahasiswa extends AppCompatActivity implements AdapterView.On
             adapter.clear();
             setup();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        datamahasiswa.clear();
+        adapter = new ListArrayAdapter(DaftarMahasiswa.this, R.layout.row_mahasiswa, datamahasiswa);
+//        adapter.clear();
+        listview.setAdapter(adapter);
+
+        Toast.makeText(this, "wow spasi", Toast.LENGTH_SHORT).show();
+        setup();
     }
 }

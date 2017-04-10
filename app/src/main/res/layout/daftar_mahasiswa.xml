@@ -4,8 +4,7 @@
     android:id="@+id/daftar_barang"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bagicode.testapi.DaftarMahasiswa">
-
+    tools:context="com.bagicode.www.videotestapi.DaftarMahasiswa">
 
     <ListView
         android:layout_width="match_parent"
@@ -17,6 +16,16 @@
         android:visibility="gone"/>
 
     <include layout="@layout/loading_and_result"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_add"
+        android:src="@android:drawable/ic_input_add"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 </RelativeLayout>

@@ -44,6 +44,7 @@ public class ListArrayAdapter extends ArrayAdapter<ModelData> {
             holder = new MyHolder();
 
             holder.ID = (TextView) convertView.findViewById(R.id.listID);
+            holder.IDPUSH = (TextView) convertView.findViewById(R.id.listID1);
             holder.Nama = (TextView) convertView.findViewById(R.id.listNamaMhs);
             holder.Jenis = (TextView) convertView.findViewById(R.id.listJenisMhs);
 
@@ -55,6 +56,7 @@ public class ListArrayAdapter extends ArrayAdapter<ModelData> {
         }
 
         holder.ID.setText("Id Mahasiswa : "+list.get(position).getidMahasiswa());
+        holder.IDPUSH.setText(list.get(position).getidMahasiswa());
         holder.Nama.setText("Nama Mahasiswa : "+list.get(position).getNama());
         holder.Jenis.setText("Kelas Mahasiswa : "+list.get(position).getKelas_mhs());
 
@@ -84,6 +86,7 @@ public class ListArrayAdapter extends ArrayAdapter<ModelData> {
     static class MyHolder {
 
         TextView ID;
+        TextView IDPUSH;
         TextView Nama;
         TextView Jenis;
 
